@@ -122,7 +122,7 @@
         <table class="data-table">
           <thead><tr><th>Data</th><th>When</th><th>Why</th></tr></thead>
           <tbody>
-            <tr><td class="strong-cell">Name &amp; email</td><td>You sign in with Apple or Google</td><td>Create and identify your account</td></tr>
+            <tr><td class="strong-cell">Name, email &amp; password</td><td>You create an account with Apple, Google, or email and password</td><td>Create and identify your account</td></tr>
             <tr><td class="strong-cell">Hair &amp; scalp photos</td><td>Each scan you run</td><td>AI analysis, your score history, before/after comparisons</td></tr>
             <tr><td class="strong-cell">Ingredient-label photos</td><td>You use the label scanner</td><td>One-time AI read of a product's ingredients — not saved to your history</td></tr>
             <tr><td class="strong-cell">Chat messages</td><td>You message the AI assistant</td><td>Generate a reply — kept only in that session, never saved to our servers</td></tr>
@@ -157,7 +157,7 @@
           <thead><tr><th>Service</th><th>Provider</th><th>What it sees</th></tr></thead>
           <tbody>
             <tr><td class="strong-cell">Sign in with Apple / Google Sign-In</td><td>Apple / Google</td><td>Your name &amp; email, to create your account</td></tr>
-            <tr><td class="strong-cell">Firebase Auth, Firestore &amp; Storage</td><td>Google</td><td>Account records, scan history, routine, and scan photos</td></tr>
+            <tr><td class="strong-cell">Firebase Auth, Firestore &amp; Storage</td><td>Google</td><td>Account records (including email/password sign-in), scan history, routine, and scan photos</td></tr>
             <tr><td class="strong-cell">Gemini API</td><td>Google</td><td>Scan photos, ingredient-label photos, and chat messages — solely to generate that response</td></tr>
             <tr><td class="strong-cell">Apple Health</td><td>Apple</td><td>Sleep &amp; heart-rate data — read on-device only, see §05</td></tr>
             <tr><td class="strong-cell">App Store / StoreKit</td><td>Apple</td><td>Your purchase &amp; payment details — HairFall Guard never sees your card</td></tr>
@@ -177,7 +177,7 @@
 
     <section class="doc-section" id="security">
       <div class="sec-label"><span class="sec-num">06</span><h2>Storage &amp; security</h2></div>
-      <p>Scan photos are stored both locally on your device and in Firebase Cloud Storage, under a path scoped to your account and protected by Firebase's access rules — only your signed-in account can read or write it. All network traffic between the app and our backend uses standard TLS encryption; the app does not implement any additional custom encryption of its own.</p>
+      <p>Scan photos are stored both locally on your device and in Firebase Cloud Storage, under a path scoped to your account and protected by Firebase's access rules — only your signed-in account can read or write it. If you sign up with email and password, your password is managed entirely by Firebase Authentication — it is never stored or visible to us in plaintext. All network traffic between the app and our backend uses standard TLS encryption; the app does not implement any additional custom encryption of its own.</p>
     </section>
 
     <section class="doc-section" id="retention">
