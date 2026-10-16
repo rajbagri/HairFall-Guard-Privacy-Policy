@@ -86,7 +86,7 @@
     <a href="#overview"><span class="n">01</span>Overview</a>
     <a href="#collect"><span class="n">02</span>What We Collect</a>
     <a href="#use"><span class="n">03</span>How We Use It</a>
-    <a href="#third-party"><span class="n">04</span>Third Parties</a>
+    <a href="#third-party"><span class="n">04</span>Third Parties &amp; AI</a>
     <a href="#health"><span class="n">05</span>Apple Health</a>
     <a href="#security"><span class="n">06</span>Storage &amp; Security</a>
     <a href="#retention"><span class="n">07</span>Retention</a>
@@ -103,7 +103,7 @@
       <h1 class="doc-title">How HairFall Guard handles your data</h1>
       <p class="doc-sub">Plainly stated: what we collect when you scan your scalp, why, and which outside services ever see it.</p>
       <div class="meta-row">
-        <span><b>Effective</b> September 16, 2026</span>
+        <span><b>Effective</b> October 16, 2026</span>
         <span><b>Applies to</b> the HairFall Guard iOS app</span>
         <span><b>Developer</b> Raj Bagri</span>
       </div>
@@ -125,7 +125,8 @@
             <tr><td class="strong-cell">Name, email &amp; password</td><td>You create an account with Apple, Google, or email and password</td><td>Create and identify your account</td></tr>
             <tr><td class="strong-cell">Hair &amp; scalp photos</td><td>Each scan you run</td><td>AI analysis, your score history, before/after comparisons</td></tr>
             <tr><td class="strong-cell">Ingredient-label photos</td><td>You use the label scanner</td><td>One-time AI read of a product's ingredients — not saved to your history</td></tr>
-            <tr><td class="strong-cell">Chat messages</td><td>You message the AI assistant</td><td>Generate a reply — kept only in that session, never saved to our servers</td></tr>
+            <tr><td class="strong-cell">Chat messages</td><td>You message the AI assistant</td><td>Generate a reply — your message and recent chat history (up to the last 10 messages) are sent with each request; kept only in that session, never saved to our servers</td></tr>
+            <tr><td class="strong-cell">Scan results, hair goal &amp; routine</td><td>You use the chat assistant or AI routine generator</td><td>Personalize the reply or routine — hair type, porosity, density, scalp condition, hair-loss severity, scores, your stated goal, and your current routine steps</td></tr>
             <tr><td class="strong-cell">Sleep &amp; heart-rate data</td><td>You connect Apple Health</td><td>Show a sleep/recovery correlation — never leaves your device (see §05)</td></tr>
             <tr><td class="strong-cell">Routine &amp; reminder settings</td><td>You build a routine</td><td>Sync your routine across your own devices</td></tr>
             <tr><td class="strong-cell">Subscription status</td><td>You purchase Premium</td><td>Unlock paid features — billing itself is handled entirely by Apple</td></tr>
@@ -142,11 +143,13 @@
       <div class="sec-label"><span class="sec-num">03</span><h2>How we use it</h2></div>
       <ul>
         <li><strong>To run the app.</strong> Your account, scans, and routine exist so the app can function — that's the whole relationship.</li>
-        <li><strong>To generate your analysis.</strong> Photos are sent to Google's Gemini API to produce your hair health score, region breakdown, and recommendations.</li>
-        <li><strong>To personalize your routine.</strong> When you ask for an AI-generated routine, your latest scan's scores (not the photo itself) are sent along with the request.</li>
+        <li><strong>To generate your analysis.</strong> If you allow AI data sharing, photos are sent to Google's Gemini API to produce your hair health score, region breakdown, and recommendations.</li>
+        <li><strong>To answer your chat questions.</strong> Your message, recent chat history, and your latest scan results and routine are sent to Gemini so the reply fits your hair, not generic advice.</li>
+        <li><strong>To read ingredient labels.</strong> The label photo is sent to Gemini to flag ingredients.</li>
+        <li><strong>To personalize your routine.</strong> When you ask for an AI-generated routine, your latest scan results (not the photo itself), your hair goal, and your current routine are sent along with the request.</li>
         <li><strong>To keep your history in sync.</strong> Scans and routine steps are stored in your account (Firebase) so they're there if you reinstall or switch devices.</li>
       </ul>
-      <p>We do not use your data to train third-party AI models beyond the single request being processed, and we do not sell your data to anyone, for any reason.</p>
+      <p>Google processes AI requests under its Gemini API terms, solely to return your result. We never sell your data or use it for advertising, for any reason.</p>
     </section>
 
     <section class="doc-section" id="third-party">
@@ -158,11 +161,16 @@
           <tbody>
             <tr><td class="strong-cell">Sign in with Apple / Google Sign-In</td><td>Apple / Google</td><td>Your name &amp; email, to create your account</td></tr>
             <tr><td class="strong-cell">Firebase Auth, Firestore &amp; Storage</td><td>Google</td><td>Account records (including email/password sign-in), scan history, routine, and scan photos</td></tr>
-            <tr><td class="strong-cell">Gemini API</td><td>Google</td><td>Scan photos, ingredient-label photos, and chat messages — solely to generate that response</td></tr>
+            <tr><td class="strong-cell">Gemini API (via Firebase AI Logic)</td><td>Google</td><td>Only if you allow AI data sharing: scan photos, ingredient-label photos, chat messages and recent chat history, scan results, hair goal, and current routine — solely to generate that response</td></tr>
             <tr><td class="strong-cell">Apple Health</td><td>Apple</td><td>Sleep &amp; heart-rate data — read on-device only, see §05</td></tr>
             <tr><td class="strong-cell">App Store / StoreKit</td><td>Apple</td><td>Your purchase &amp; payment details — HairFall Guard never sees your card</td></tr>
           </tbody>
         </table>
+      </div>
+      <div class="callout">
+        <p class="cal-label">AI data sharing needs your permission</p>
+        <p>Nothing is sent to Google's Gemini AI until you allow it. Right after sign-in, the app shows a consent screen explaining what is sent, who it goes to, and why, with <strong>Allow</strong> and <strong>Not Now</strong> options. If you choose Not Now, no data is sent to Gemini, AI features stay off, and the rest of the app keeps working; each AI feature asks again before it runs. You can turn AI data sharing on or off at any time in Profile → Preferences → AI Data Sharing.</p>
+        <p>Google, which processes this data for us through Gemini and Firebase, provides the same or equal protection of user data as described in this policy.</p>
       </div>
     </section>
 
@@ -189,6 +197,7 @@
       <div class="sec-label"><span class="sec-num">08</span><h2>Your rights &amp; choices</h2></div>
       <ul>
         <li><strong>Delete your account.</strong> In-app: Profile → Preferences → Account → Delete Account. This is permanent and immediate.</li>
+        <li><strong>Turn AI data sharing on or off</strong> at any time in Profile → Preferences → AI Data Sharing. When it's off, nothing is sent to Gemini.</li>
         <li><strong>Disconnect Apple Health</strong> at any time without affecting the rest of the app.</li>
         <li><strong>Turn off notifications</strong> (routine reminders, daily tips, scan reminders) individually from Profile → Preferences.</li>
         <li><strong>Ask us directly.</strong> For an export of your data, or any question about what we hold, contact us at the address in §12.</li>
@@ -215,7 +224,7 @@
       <p>Questions about this policy or your data: <a href="mailto:rajbagri3214@gmail.com">rajbagri3214@gmail.com</a></p>
     </section>
 
-    <footer class="doc-foot">HairFall Guard · Privacy Policy · effective September 16, 2026</footer>
+    <footer class="doc-foot">HairFall Guard · Privacy Policy · effective October 16, 2026</footer>
   </main>
 </div>
 
